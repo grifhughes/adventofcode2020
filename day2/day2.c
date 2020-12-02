@@ -1048,9 +1048,7 @@ size_t part2(char target, char *password, size_t min, size_t max)
 
 int main(void)
 {
-    char buf[LINES];
-    char password[PASSWORD];
-    char target = 0;
+    char password[PASSWORD], target = 0;
     size_t min = 0, max = 0, valid_p1 = 0, valid_p2 = 0;
 
     clock_t start = clock();
