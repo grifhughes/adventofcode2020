@@ -350,5 +350,8 @@ int main(void)
     size_t p1 = check_slope(3, 1);
     size_t p2 = check_slope(1, 1) * p1 * check_slope(5, 1) * check_slope(7, 1) * check_slope(1, 2);
     clock_t end = clock();
+
+    // gcc optimizes the function calls away if the variables are unused...
+    printf("%zu%zu\n", p1, p2);
     printf("%lf ms\n", ((double) (end - start)) / CLOCKS_PER_SEC * 1000);
 }
