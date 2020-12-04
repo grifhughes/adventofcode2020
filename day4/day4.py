@@ -295,15 +295,15 @@ INPUTS = [
 
 
 def check_byr(byr):
-    return byr in range(1920, 2003)
+    return int(byr) in range(1920, 2003)
 
 
 def check_iyr(iyr):
-    return iyr in range(2010, 2021)
+    return int(iyr) in range(2010, 2021)
 
 
 def check_eyr(eyr):
-    return eyr in range(2020, 2031)
+    return int(eyr) in range(2020, 2031)
 
 
 height_check = re.compile("^[0-9]+(?:cm|in)$")
@@ -349,18 +349,22 @@ for input in INPUTS:
     tmp = {}
 
 # part 2
+call_table = {
+    "byr": check_byr,
+    "iyr": check_iyr,
+    "eyr": check_eyr,
+    "hgt": check_hgt,
+    "hcl": check_hcl,
+    "ecl": check_ecl,
+    "pid": check_pid,
+}
 valid_p2 = 0
 for valid_passport in valid_passports:
-    checks = (
-        check_byr(int(valid_passport["byr"])),
-        check_iyr(int(valid_passport["iyr"])),
-        check_eyr(int(valid_passport["eyr"])),
-        check_hgt(valid_passport["hgt"]),
-        check_hcl(valid_passport["hcl"]),
-        check_ecl(valid_passport["ecl"]),
-        check_pid(valid_passport["pid"]),
+    validate_fields = (
+        call_table[key](valid_passport[key])
+        for key in valid_passport if key != "cid"
     )
-    if not all(checks):
+    if not all(validate_fields):
         continue
     valid_p2 += 1
 
