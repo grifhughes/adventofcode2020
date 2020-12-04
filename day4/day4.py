@@ -335,7 +335,7 @@ def check_pid(pid):
 
 
 # part 1
-REQUIRED_FIELDS = set(["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"])
+REQUIRED_FIELDS = {"byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"}
 tmp = {}
 valid_passports = []
 for input in INPUTS:
