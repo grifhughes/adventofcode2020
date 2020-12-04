@@ -351,19 +351,16 @@ for input in INPUTS:
 # part 2
 valid_p2 = 0
 for valid_passport in valid_passports:
-    if not check_byr(int(valid_passport["byr"])):
-        continue
-    if not check_iyr(int(valid_passport["iyr"])):
-        continue
-    if not check_eyr(int(valid_passport["eyr"])):
-        continue
-    if not check_hgt(valid_passport["hgt"]):
-        continue
-    if not check_hcl(valid_passport["hcl"]):
-        continue
-    if not check_ecl(valid_passport["ecl"]):
-        continue
-    if not check_pid(valid_passport["pid"]):
+    checks = (
+        check_byr(int(valid_passport["byr"])),
+        check_iyr(int(valid_passport["iyr"])),
+        check_eyr(int(valid_passport["eyr"])),
+        check_hgt(valid_passport["hgt"]),
+        check_hcl(valid_passport["hcl"]),
+        check_ecl(valid_passport["ecl"]),
+        check_pid(valid_passport["pid"]),
+    )
+    if not all(checks):
         continue
     valid_p2 += 1
 
