@@ -361,8 +361,8 @@ call_table = {
 valid_p2 = 0
 for valid_passport in valid_passports:
     validate_fields = (
-        call_table[key](valid_passport[key])
-        for key in valid_passport if key != "cid"
+        call_table[key](val)
+        for key, val in valid_passport.items() if key != "cid"
     )
     if not all(validate_fields):
         continue
